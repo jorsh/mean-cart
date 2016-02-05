@@ -1,2 +1,2 @@
 # mean-cart
-A shopping cart built using MEAN stack
+A To Do list built using MEAN stack
