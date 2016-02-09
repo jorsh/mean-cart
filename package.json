@@ -1,0 +1,44 @@
+{
+  "name": "mean-todo",
+  "version": "1.0.0",
+  "description": "mean todo node js",
+  "main": "./app/app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorsh/mean-todo.git"
+  },
+  "keywords": [
+    "mean"
+  ],
+  "author": "Jorge Arenas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorsh/mean-todo/issues"
+  },
+  "homepage": "https://github.com/jorsh/mean-todo#readme",
+  "dependencies": {
+    "angular": "^1.4.9",
+    "body-parser": "^1.14.2",
+    "bootstrap-styl": "^5.0.5",
+    "express": "^4.13.4",
+    "gulp-connect": "^2.3.1",
+    "gulp-flatten": "^0.2.0",
+    "mongoose": "^4.4.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.9",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.0",
+    "gulp-flatten": "^0.2.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-streamify": "^1.0.2",
+    "gulp-stylus": "^2.3.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
