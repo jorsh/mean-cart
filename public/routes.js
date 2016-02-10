@@ -1,6 +1,3 @@
-/**
- * Created by Marco Romero on 1/8/2015.
- */
 'use strict';
 function Routes($stateProvider,$urlRouterProvider){
     $urlRouterProvider.otherwise('/');

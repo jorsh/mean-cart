@@ -1,6 +1,3 @@
-/**
- * Created by Marco Romero on 1/9/2015.
- */
 require('chai').should();
 describe('Todos page',function(){
     'use strict';
