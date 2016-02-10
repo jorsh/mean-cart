@@ -25,14 +25,27 @@ gulp.task('html', ['index'], function(){
         .pipe(connect.reload());
     });
 
+
+var bootstrap = require('bootstrap-styl');
+
 gulp.task('css', function(){
     return gulp.src('./public/**/*.styl')
         .pipe(stylus({
-          'include css': true
+            'use': bootstrap(),
+            'include css': true
         }))
         .pipe(flatten())
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(gulp.dest('./dist/styles'));
     });
+
+gulp.task('bundle-vendors',function(){
+    return browserify('./public/core-dependencies.js',
+        {debug:false,transform:['debowerify','uglifyify']})
+        .bundle()
+        .pipe(source('vendors.js'))
+        .pipe(gulp.dest('./dist/scripts'))
+        .pipe(connect.reload());
+});
 
 gulp.task('javascript', function(){
     var bundleStream = browserify('./public/app.js')
@@ -42,7 +55,7 @@ gulp.task('javascript', function(){
     .pipe(source('app.js'))
     .pipe(streamify(uglify()))
     .pipe(rename('bundle.js'))
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dist/scripts'))
     });
 
 gulp.task('serve', function(){
@@ -59,4 +72,4 @@ gulp.task('watch', function(){
     gulp.watch('./app/**/*.js', ['javascript']);
     });
 
-gulp.task('default',['html','css','javascript','serve','watch']);
+gulp.task('default',['html','css','bundle-vendors','javascript','serve','watch']);
