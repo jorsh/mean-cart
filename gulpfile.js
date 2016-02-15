@@ -68,8 +68,10 @@ gulp.task('serve', function(){
 
 gulp.task('watch', function(){
     gulp.watch('./app/**/*.jade', ['html']);
-    gulp.watch('./app/**/*.styl', ['css']);
+    gulp.watch('./public/**/*.jade', ['html']);
+    gulp.watch('./public/**/*.styl', ['css']);
     gulp.watch('./app/**/*.js', ['javascript']);
+    gulp.watch('./public/**/*.js', ['javascript']);
     });
 
 gulp.task('default',['html','css','bundle-vendors','javascript','serve','watch']);
