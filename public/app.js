@@ -1,6 +1,6 @@
 'use strict';
     angular
-        .module('spa',['ui.router',
+        .module('todo',['ui.router',
                       'ui.bootstrap',
                       require('./landing').name,
                       require('./todos').name])
