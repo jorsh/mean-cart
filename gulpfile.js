@@ -2,7 +2,7 @@ var browserify = require('browserify');
 var connect = require('gulp-connect');
 var flatten = require('gulp-flatten');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+//var gutil = require('gulp-util');
 var jade = require('gulp-jade');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
@@ -28,7 +28,12 @@ gulp.task('html', ['index'], function(){
 
 var bootstrap = require('bootstrap-styl');
 
-gulp.task('css', function(){
+gulp.task('fonts', function(){
+    return gulp.src('./node_modules/bootstrap-styl/fonts/**/*.*')
+        .pipe(gulp.dest('./dist/fonts'));
+});
+
+gulp.task('css', ['fonts'], function(){
     return gulp.src('./public/**/*.styl')
         .pipe(stylus({
             'use': bootstrap(),
@@ -37,6 +42,7 @@ gulp.task('css', function(){
         .pipe(flatten())
         .pipe(gulp.dest('./dist/styles'));
     });
+
 
 gulp.task('bundle-vendors',function(){
     return browserify('./public/core-dependencies.js',
@@ -49,7 +55,7 @@ gulp.task('bundle-vendors',function(){
 
 gulp.task('javascript', function(){
     var bundleStream = browserify('./public/app.js')
-    .bundle()
+    .bundle();
      
     bundleStream
     .pipe(source('app.js'))

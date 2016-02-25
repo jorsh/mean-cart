@@ -1,44 +1,71 @@
 'use strict';
-function LandingController($http){
+function LandingController(RestService){
     var self = this;
+    var url = '/tasks';
     self.heading = 'My List';
     self.tasks = ['item1'];
     self.txtTask = '';
+    self.postLabel = 'Add Task';
+    self.taskId = '';
 
-    self.getTasks = function(){
-        $http({
-            method: 'GET',
-            url: 'http://localhost:3000/tasks'
-        }).then(function successCallback(response) {
-            self.tasks = response.data;
-            console.log(self.tasks);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
+    self.preEditTask = function(index) {
+        self.txtTask = self.tasks[index].name;
+        self.postLabel = 'Edit Task';
+        self.action = 'edit';
+        self.taskId = self.tasks[index]._id;
     };
 
-    self.addTask = function(){
-        $http({
-            method: 'POST',
-            url: 'http://localhost:3000/task',
-            data: {name: self.txtTask}
-        }).then(function successCallback(response) {
-            //self.tasks = response.data;
-            console.log(self.tasks);
-            self.getTasks();
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
+    self.postAction = function () {
+        if(self.action === 'edit'){
+            editTask(self.taskId);
+            self.postLabel = 'Add Task';
+            self.txtTask = '';
+        } else {
+            addTask();
+        }
+    };
+
+    self.getTasks = function(){
+        RestService.request('GET', url, {}, {})
+            .then(function(response) {
+                self.tasks = response.data;
+            }, function(error) {
+                console.log(error);
+            });
+    };
+
+    function addTask(){
+        RestService.request('POST', '/task',{}, {name: self.txtTask})
+            .then(function() {
+                self.txtTask = '';
+                self.getTasks();
+            }, function(error) {
+                console.log(error);
+            });
+    }
+
+    function editTask(taskId){
+        RestService.request('PUT', '/task/'+taskId, {}, {name: self.txtTask})
+            .then(function() {
+                self.txtTask = '';
+                self.getTasks();
+            }, function(error) {
+                console.log(error);
+            });
+    }
+
+    self.removeTask = function(index){
+        var taskId = self.tasks[index]._id;
+
+        RestService.request('DELETE', '/task/'+taskId, {}, {})
+            .then(function() {
+                self.getTasks();
+            }, function(error) {
+                console.log(error);
+            });
     };
 
     self.getTasks();
+    }
 
-
-}
 module.exports=LandingController;

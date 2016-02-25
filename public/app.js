@@ -6,4 +6,5 @@
                       require('./todos').name])
         .config(['$stateProvider',
                  '$urlRouterProvider',
-                 require('./routes')]);
+                 require('./routes')])
+        .constant('CONSTANTS', require('./common/constants.js'));
