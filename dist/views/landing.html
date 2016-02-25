@@ -1,4 +1,14 @@
 
-<div id="landing">
-  <h1 ng-bind="landing.heading"></h1><a ui-sref="todos">Go to my To-Do list</a>
+<div id="landing" ng-controller="LandingController as landing">
+  <h1 ng-bind="landing.heading"></h1>
+  <form class="form-inline">
+    <div class="form-group">
+      <input id="task-field" ng-model="landing.txtTask" type="text" placeholder="E.g. Buy food" class="form-control"/>
+    </div>
+    <button type="submit" data-action="{{landing.action}}" ng-click="landing.postAction(landing.action)" class="btn btn-primary">{{landing.postLabel}}</button>
+  </form>
+  <hr/>
+  <ul>
+    <li ng-repeat="task in landing.tasks track by $index">{{task.name}}<span aria-hidden="true" ng-click="landing.removeTask($index)" class="glyphicon glyphicon-remove"></span><span aria-hidden="true" ng-click="landing.preEditTask($index)" class="glyphicon glyphicon-edit"></span></li>
+  </ul>
 </div>
