@@ -1,12 +1,20 @@
-#landing(ng-controller='LandingController as landing')
-   h1(ng-bind="landing.heading")
-   form.form-inline
-      .form-group
-         //- label(for='task') Task
-         input#task-field.form-control(ng-model='landing.txtTask', type='text', placeholder='E.g. Buy food')
-      button.btn.btn-primary(type='submit', data-action='{{landing.action}}', ng-click='landing.postAction(landing.action)') {{landing.postLabel}}
-   hr
-   ul
-       li(ng-repeat="task in landing.tasks track by $index") {{task.name}}
-          span(class='glyphicon glyphicon-remove' aria-hidden='true' ng-click = 'landing.removeTask($index)')
-          span(class='glyphicon glyphicon-edit' aria-hidden='true' ng-click = 'landing.preEditTask($index)')
+.row
+    .col-sm-12.col-md-6.col-lg-6.col-md-offset-3.col-lg-offset-3
+        #landing(ng-controller='LandingController as landing')
+            .panel.panel-info
+                .panel-heading
+                    h3.panel-title(ng-bind="landing.heading")
+                .panel-body
+                    form.form-inline
+                        .form-group
+                            input#task-field.form-control(ng-model='landing.txtTask', type='text', placeholder='Add a to-do...')
+                        button.btn.btn-primary(type='submit', data-action='{{landing.action}}', ng-click='landing.postAction(landing.action)') {{landing.postLabel}}
+                    hr
+                    ul.list-group
+                        li.list-group-item.list-item(ng-repeat="task in landing.tasks track by $index")
+                            .checkbox
+                                label
+                                    input(type='checkbox', value='')
+                                    | {{task.name}}
+                                span.pull-right(class='glyphicon glyphicon-remove' aria-hidden='true' ng-click = 'landing.removeTask($index)')
+                                span.pull-right(class='glyphicon glyphicon-edit' aria-hidden='true' ng-click = 'landing.editAction($index)')

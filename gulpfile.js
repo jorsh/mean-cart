@@ -33,7 +33,7 @@ gulp.task('fonts', function(){
         .pipe(gulp.dest('./dist/fonts'));
 });
 
-gulp.task('css', ['fonts'], function(){
+gulp.task('css', function(){
     return gulp.src('./public/**/*.styl')
         .pipe(stylus({
             'use': bootstrap(),
@@ -80,4 +80,4 @@ gulp.task('watch', function(){
     gulp.watch('./public/**/*.js', ['javascript']);
     });
 
-gulp.task('default',['html','css','bundle-vendors','javascript','serve','watch']);
+gulp.task('default',['html','css','fonts','bundle-vendors','javascript','serve','watch']);
