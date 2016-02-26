@@ -2,6 +2,6 @@
 *.iml
 
 ## Directory-based project format:
-.idea/
-node_modules/
-dist/
+/.idea
+/dist
+/node_modules
