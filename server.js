@@ -4,20 +4,16 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   res.render('index', {title: 'To Do API'});
 });
 
 
-// MongoDB connect using mongoose
-TaskSchema = new mongoose.Schema({
-  name: String
-});
+// Importing Schema
+var Task = require('./app/models/Tasks.js');
 
-var Task = mongoose.model('Task', TaskSchema);
-
-// API 
-mongoose.connect('mongodb://localhost/todo');
+// Connecting to the mongodb importing the url from config
+mongoose.connect(require('./config/db.js').url);
 
 
 var db = mongoose.connection;

@@ -1,7 +1,7 @@
-var mongoose = require(mongoose);
+var mongoose = require('mongoose');
 
 TasksSchema = new mongoose.Schema({
-	name: String
+  name: String
 });
 
-mongoose.model('Tasks', TasksSchema);
+module.exports = mongoose.model('Tasks', TasksSchema);
